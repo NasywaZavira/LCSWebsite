@@ -630,6 +630,10 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+#epigraph-text.is-hiding {
+  opacity: 0;
+  transform: translateY(6px);
+}
 
 /* ---------- ambient SFX/BGM cue caption (placeholder for real audio) ---------- */
 #cue-caption {

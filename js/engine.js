@@ -46,6 +46,7 @@ const Engine = (() => {
   let waitingForAdvance = false;
   let flags = {};
   let pendingExploreReturn = null; // set while showing a hotspot's text; resumes the explore menu on advance
+  let epigraphFadeTimer = null;
 
   const els = {};
 
@@ -268,22 +269,32 @@ const Engine = (() => {
   }
 
   function showEpigraph(text) {
+    clearTimeout(epigraphFadeTimer);
+
     els.textboxWrap.classList.remove("visible");
     els.epigraphLayer.classList.add("visible");
     els.epigraphText.classList.remove("show");
-    // small delay so the fade-in transition is visible on repeated lines
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => {
-        els.epigraphText.textContent = text;
-        els.epigraphText.classList.add("show");
-      }),
-    );
+    els.epigraphText.classList.add("is-hiding");
+
+    epigraphFadeTimer = setTimeout(() => {
+      els.epigraphText.textContent = text;
+      els.epigraphText.classList.remove("is-hiding");
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          els.epigraphText.classList.add("show");
+        }),
+      );
+    }, 360);
+
     waitingForAdvance = true;
     els.epigraphLayer.onclick = onAdvanceClick;
   }
 
   function hideEpigraph() {
     if (els.epigraphLayer.classList.contains("visible")) {
+      clearTimeout(epigraphFadeTimer);
+      els.epigraphText.classList.remove("show");
+      els.epigraphText.classList.add("is-hiding");
       els.epigraphLayer.classList.remove("visible");
     }
     els.textboxWrap.classList.add("visible");
