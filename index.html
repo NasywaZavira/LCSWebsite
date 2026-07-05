@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lost-Child; Syndrome — Prologue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="game">
+      <!-- Backgrounds -->
+      <div id="bg-layer">
+        <div class="bg" id="bg-a"></div>
+        <div class="bg" id="bg-b"></div>
+        <div id="scanlines"></div>
+        <div id="vignette"></div>
+      </div>
+
+      <!-- Sprites -->
+      <div id="sprite-layer">
+        <div class="sprite" id="sprite-left"></div>
+        <div class="sprite" id="sprite-right"></div>
+      </div>
+
+      <!-- Title card -->
+      <div id="title-card">
+        <h1>Lost-Child; <em>Syndrome</em></h1>
+        <p class="subtitle">
+          “If you are lost, and the thought becomes the truth. About what kind
+          of future will you create? Is it a happy ending? or The bittersweet
+          one? The endless cycle? Or…"
+        </p>
+        <button id="start-btn">begin</button>
+      </div>
+
+      <!-- Epigraph / cold-open layer -->
+      <div id="epigraph-layer">
+        <p id="epigraph-text"></p>
+      </div>
+
+      <!-- Ambient SFX/BGM caption (placeholder until real audio exists) -->
+      <div id="cue-caption"></div>
+
+      <!-- Choice layer -->
+      <div id="choice-layer"></div>
+
+      <!-- Dialogue box -->
+      <div id="textbox-wrap">
+        <div id="namebox"></div>
+        <div id="textbox">
+          <div id="portrait-box">
+            <img id="portrait-img" src="" alt="" />
+            <span id="portrait-fallback">icon</span>
+          </div>
+          <div id="textbox-divider"></div>
+          <div id="textbox-content">
+            <p id="dialogue-text"></p>
+            <div id="continue-indicator">▾</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top-right controls -->
+      <div id="controls">
+        <button id="save-btn" title="Save">save</button>
+        <button id="load-btn" title="Load">load</button>
+        <button id="skip-btn" title="Skip">skip</button>
+      </div>
+    </div>
+
+    <script src="js/engine.js"></script>
+    <script src="scenes/prologue.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
