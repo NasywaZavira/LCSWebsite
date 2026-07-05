@@ -305,7 +305,7 @@ body {
   letter-spacing: 0.01em;
 }
 #title-card h1 em {
-  color: var(--ash);
+  color: var(--wound);
   font-style: italic;
   font-weight: 400;
 }
