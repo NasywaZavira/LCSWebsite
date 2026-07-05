@@ -21,7 +21,7 @@ const PROLOGUE_SCRIPT = [
   { epigraph: "Or..." },
 
   { bg: "tv_room" },
-  { sprite: "left", name: "Iori (silhouette)", dim: true },
+  { bg: "iori-prologue" },  
   { epigraph: "If anything... I  would like to see it myself." },
   { hide: "left" },
 

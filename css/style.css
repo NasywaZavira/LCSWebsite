@@ -664,3 +664,7 @@ body {
 #game.filter-red .bg {
   filter: saturate(0.35) sepia(0.25) hue-rotate(-18deg) brightness(0.9);
 }
+
+.bg-iori-prologue {
+  background-image: url("assets/CG/iori-prologue.webp");
+}
