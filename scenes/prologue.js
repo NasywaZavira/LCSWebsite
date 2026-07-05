@@ -20,8 +20,7 @@ const PROLOGUE_SCRIPT = [
   { epigraph: "The endless cycle?" },
   { epigraph: "Or..." },
 
-  { bg: "tv_room" },
-  { bg: "iori-prologue" },  
+  { bg: "iori-prologue" },
   { epigraph: "If anything... I  would like to see it myself." },
   { hide: "left" },
 
