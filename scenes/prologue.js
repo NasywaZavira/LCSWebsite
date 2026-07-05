@@ -209,10 +209,12 @@ const PROLOGUE_SCRIPT = [
       {
         label: "Check: Nearby Desks",
         text: "Most of them are empty. Chairs pushed in too neatly. Monitors turned off.",
+        portrait: "wary",
       },
       {
         label: "Check: Window",
         text: "I move toward the window. The city outside should be there\u2014usually lit with lights, cars, something. But... it\u2019s dark. I can\u2019t even see anything past this window.",
+        portrait: "confused",
       },
     ],
     continueText: "Go to the Hallway \u2192",

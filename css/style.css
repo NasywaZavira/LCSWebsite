@@ -544,15 +544,6 @@ body {
   color: var(--ash);
   border-color: rgba(138, 141, 148, 0.4);
 }
-.explore-result {
-  font-family: var(--serif);
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--blanc);
-  max-width: 520px;
-  text-align: center;
-  min-height: 1.6em;
-}
 .continue-btn {
   font-family: var(--mono);
   font-size: 11px;

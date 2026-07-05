@@ -25,10 +25,13 @@
         { text:'Option A', goto:'labelA' },
         { text:'Option B', goto:'labelB' } ] }  branching choice (one-shot, dismisses after pick)
    { explore:'Prompt', hotspots:[
-        { label:'Check: Window', text:'...' } ],
+        { label:'Check: Window', text:'...', portrait:'wary' } ],
      continueText:'Hallway', continueGoto:'hallway' }
-                                                 point-and-click hotspots that can be revisited;
-                                                 continue button advances the scene
+                                                 point-and-click hotspots that can be revisited.
+                                                 Clicking a hotspot plays its text through the normal
+                                                 textbox (Marley's POV, icon stays visible) — advancing
+                                                 that line returns to the hotspot menu automatically.
+                                                 continue button advances the scene for good.
    { label:'labelA' }                           jump target (no-op beat)
    { goto:'labelC' }                            unconditional jump
    { end:true }                                  ends the scene
@@ -42,6 +45,7 @@ const Engine = (() => {
   let index = 0;
   let waitingForAdvance = false;
   let flags = {};
+  let pendingExploreReturn = null; // set while showing a hotspot's text; resumes the explore menu on advance
 
   const els = {};
 
@@ -67,6 +71,11 @@ const Engine = (() => {
   function onAdvanceClick() {
     if (!waitingForAdvance) return;
     waitingForAdvance = false;
+    if (pendingExploreReturn) {
+      const beat = pendingExploreReturn;
+      pendingExploreReturn = null;
+      return showExplore(beat);
+    }
     step();
   }
 
@@ -215,7 +224,8 @@ const Engine = (() => {
   }
 
   function updatePortrait(beat, mode) {
-    if (mode === "narration" || !beat.speaker) {
+    const force = !!beat._forcePortrait;
+    if (!force && (mode === "narration" || !beat.speaker)) {
       els.portraitBox.classList.add("hidden");
       els.textboxDivider.classList.add("hidden");
       return;
@@ -223,27 +233,22 @@ const Engine = (() => {
     els.portraitBox.classList.remove("hidden");
     els.textboxDivider.classList.remove("hidden");
 
-    if (beat.portrait) {
-      const file = `assets/sprites/${beat.speaker.toLowerCase()}_${beat.portrait}.png`;
-      if (els.portraitImg.dataset.current !== file) {
-        els.portraitImg.dataset.current = file;
+    const speakerName = beat.speaker || "Marley";
+    const portraitState = beat.portrait || "neutral";
+    const file = `assets/sprites/${speakerName.toLowerCase()}_${portraitState}.png`;
+    if (els.portraitImg.dataset.current !== file) {
+      els.portraitImg.dataset.current = file;
+      els.portraitImg.classList.remove("loaded");
+      els.portraitFallback.classList.remove("hidden");
+      els.portraitImg.onload = () => {
+        els.portraitImg.classList.add("loaded");
+        els.portraitFallback.classList.add("hidden");
+      };
+      els.portraitImg.onerror = () => {
         els.portraitImg.classList.remove("loaded");
         els.portraitFallback.classList.remove("hidden");
-        els.portraitImg.onload = () => {
-          els.portraitImg.classList.add("loaded");
-          els.portraitFallback.classList.add("hidden");
-        };
-        els.portraitImg.onerror = () => {
-          els.portraitImg.classList.remove("loaded");
-          els.portraitFallback.classList.remove("hidden");
-        };
-        els.portraitImg.src = file;
-      }
-    } else {
-      delete els.portraitImg.dataset.current;
-      els.portraitImg.classList.remove("loaded");
-      els.portraitImg.removeAttribute("src");
-      els.portraitFallback.classList.remove("hidden");
+      };
+      els.portraitImg.src = file;
     }
   }
 
@@ -285,6 +290,8 @@ const Engine = (() => {
   }
 
   function showExplore(beat) {
+    if (!beat._checked) beat._checked = new Set();
+
     els.choiceLayer.innerHTML = "";
     const prompt = document.createElement("p");
     prompt.className = "choice-prompt";
@@ -293,24 +300,27 @@ const Engine = (() => {
     prompt.textContent = beat.explore;
     els.choiceLayer.appendChild(prompt);
 
-    const result = document.createElement("p");
-    result.className = "explore-result";
-
     const hotspotWrap = document.createElement("div");
     hotspotWrap.className = "explore-hotspots";
     beat.hotspots.forEach((h) => {
       const btn = document.createElement("button");
-      btn.className = "hotspot-btn";
+      btn.className =
+        "hotspot-btn" + (beat._checked.has(h.label) ? " checked" : "");
       btn.textContent = h.label;
       btn.addEventListener("click", () => {
-        result.textContent = h.text;
-        btn.classList.add("checked");
+        beat._checked.add(h.label);
+        els.choiceLayer.classList.remove("visible");
+        pendingExploreReturn = beat;
+        showLine({
+          narration: h.text,
+          speaker: "Marley",
+          portrait: h.portrait || "neutral",
+          _forcePortrait: true,
+        });
       });
       hotspotWrap.appendChild(btn);
     });
-
     els.choiceLayer.appendChild(hotspotWrap);
-    els.choiceLayer.appendChild(result);
 
     if (beat.continueGoto) {
       const cont = document.createElement("button");
