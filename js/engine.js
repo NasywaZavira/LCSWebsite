@@ -2,7 +2,10 @@
    Lost-Child; Syndrome — VN engine core
    A script is an array of "beats". Each beat is one of:
 
-   { bg: 'facility_hall' }                     switch background
+   { bg: 'facility_hall' }                     switch background (1.1s fade by default)
+   { bg: 'iori-prologue', bgFade: 2500 }        same, but with a custom fade duration in ms —
+                                                 use a longer fade for a full-screen reveal you
+                                                 don't want popping in abruptly
    { sprite:'left'|'right', name:'Noir',
      art:'noir_neutral.png', dim:true }        show/update a sprite (art optional -> placeholder)
    { hide:'left'|'right' }                     hide a sprite
@@ -97,7 +100,7 @@ const Engine = (() => {
     }
 
     if (beat.bg) {
-      setBackground(beat.bg);
+      setBackground(beat.bg, beat.bgFade);
       return step();
     }
 
@@ -157,9 +160,12 @@ const Engine = (() => {
     return step();
   }
 
-  function setBackground(name) {
+  function setBackground(name, fadeMs) {
     const showing = els.bgA.classList.contains("active") ? els.bgA : els.bgB;
     const hidden = showing === els.bgA ? els.bgB : els.bgA;
+    const duration = fadeMs ? fadeMs + "ms" : "";
+    hidden.style.transitionDuration = duration;
+    showing.style.transitionDuration = duration;
     hidden.className = "bg bg-" + name + " active";
     showing.classList.remove("active");
   }
