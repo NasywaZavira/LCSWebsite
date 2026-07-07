@@ -242,7 +242,7 @@ const Engine = (() => {
 
     const speakerName = beat.speaker || "Marley";
     const portraitState = beat.portrait || "neutral";
-    const file = `assets/sprites/${speakerName.toLowerCase()}_${portraitState}.png`;
+    const file = `assets/sprites/${speakerName.toLowerCase()}_${portraitState}.webp`;
     if (els.portraitImg.dataset.current !== file) {
       els.portraitImg.dataset.current = file;
       els.portraitImg.classList.remove("loaded");
