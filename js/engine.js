@@ -1,6 +1,5 @@
 /* ============================================================
    Lost-Child; Syndrome — VN engine core
-   A script is an array of "beats". Each beat is one of:
 
    { bg: 'facility_hall' }                     switch background (1.1s fade by default)
    { bg: 'iori-prologue', bgFade: 2500 }        same, but with a custom fade duration in ms —
@@ -50,6 +49,8 @@ const Engine = (() => {
   let flags = {};
   let pendingExploreReturn = null; // set while showing a hotspot's text; resumes the explore menu on advance
   let epigraphFadeTimer = null;
+  let lastLineText = ""; // most recent narration/thought/dialogue text, used as a save-slot preview
+  let currentBgName = ""; // current background name, could be used for slot thumbnails later
 
   const els = {};
 
@@ -161,6 +162,7 @@ const Engine = (() => {
   }
 
   function setBackground(name, fadeMs) {
+    currentBgName = name;
     const showing = els.bgA.classList.contains("active") ? els.bgA : els.bgB;
     const hidden = showing === els.bgA ? els.bgB : els.bgA;
     const duration = fadeMs ? fadeMs + "ms" : "";
@@ -224,6 +226,7 @@ const Engine = (() => {
           : "";
     els.namebox.classList.toggle("dim", mode === "thought");
     els.dialogueText.textContent = beat.narration || beat.thought || beat.text;
+    lastLineText = beat.narration || beat.thought || beat.text || lastLineText;
     els.dialogueText.classList.remove("narration", "thought");
     els.dialogueText.classList.add(mode === "dialogue" ? "narration" : mode); // dialogue reuses plain styling
     updatePortrait(beat, mode);
@@ -385,18 +388,45 @@ const Engine = (() => {
     waitingForAdvance = false;
   }
 
-  function save(slot = "default") {
-    localStorage.setItem("lcs-save-" + slot, JSON.stringify({ index, flags }));
+  function slotKey(n) {
+    return "lcs-slot-" + n;
   }
 
-  function load(slot = "default") {
-    const raw = localStorage.getItem("lcs-save-" + slot);
+  function saveToSlot(n) {
+    const data = {
+      index,
+      flags,
+      savedAt: Date.now(),
+      label: (lastLineText || "").slice(0, 80),
+      bg: currentBgName,
+    };
+    localStorage.setItem(slotKey(n), JSON.stringify(data));
+    return data;
+  }
+
+  function loadFromSlot(n) {
+    const raw = localStorage.getItem(slotKey(n));
     if (!raw) return false;
     const data = JSON.parse(raw);
     index = data.index;
     flags = data.flags || {};
     step();
     return true;
+  }
+
+  function listSlots(count = 6) {
+    const out = [];
+    for (let i = 1; i <= count; i++) {
+      const raw = localStorage.getItem(slotKey(i));
+      out.push(raw ? JSON.parse(raw) : null);
+    }
+    return out;
+  }
+
+  function newGame() {
+    index = 0;
+    flags = {};
+    start();
   }
 
   function skip() {
@@ -417,5 +447,15 @@ const Engine = (() => {
     }
   }
 
-  return { init, loadScript, start, save, load, skip, flags: () => flags };
+  return {
+    init,
+    loadScript,
+    start,
+    newGame,
+    saveToSlot,
+    loadFromSlot,
+    listSlots,
+    skip,
+    flags: () => flags,
+  };
 })();

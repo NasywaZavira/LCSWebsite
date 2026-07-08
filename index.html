@@ -38,6 +38,55 @@
         <button id="start-btn">begin</button>
       </div>
 
+      <!-- Main menu -->
+      <div id="menu-screen" class="screen hidden">
+        <div class="screen-inner">
+          <p class="screen-eyebrow">Lost-Child; Syndrome</p>
+          <h2 class="screen-heading">Menu</h2>
+          <nav class="menu-list">
+            <button class="menu-item" id="menu-newgame">New Game</button>
+            <button class="menu-item" id="menu-continue">Continue</button>
+            <button class="menu-item" id="menu-load">Load</button>
+            <button class="menu-item" id="menu-settings">Settings</button>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Save / Load slots -->
+      <div id="slots-screen" class="screen hidden">
+        <div class="screen-inner">
+          <h2 class="screen-heading" id="slots-heading">Load</h2>
+          <div id="slots-grid"></div>
+          <button class="screen-back" id="slots-back">Back</button>
+        </div>
+      </div>
+
+      <!-- Settings -->
+      <div id="settings-screen" class="screen hidden">
+        <div class="screen-inner">
+          <h2 class="screen-heading">Settings</h2>
+          <div class="settings-row">
+            <label for="music-volume">Music Volume</label>
+            <input
+              type="range"
+              id="music-volume"
+              min="0"
+              max="100"
+              value="80"
+            />
+          </div>
+          <div class="settings-row">
+            <label for="sfx-volume">SFX Volume</label>
+            <input type="range" id="sfx-volume" min="0" max="100" value="80" />
+          </div>
+          <p class="settings-note">
+            Audio isn't wired in yet — these will control music/sfx volume once
+            sound is added.
+          </p>
+          <button class="screen-back" id="settings-back">Back</button>
+        </div>
+      </div>
+
       <!-- Epigraph / cold-open layer -->
       <div id="epigraph-layer">
         <p id="epigraph-text"></p>
@@ -76,5 +125,6 @@
     <script src="js/engine.js"></script>
     <script src="scenes/prologue.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
   </body>
 </html>
