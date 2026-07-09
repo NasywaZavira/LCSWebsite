@@ -43,6 +43,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("menu-continue").disabled = !hasSave;
   }
 
+  function openLoadScreen(from) {
+    slotsMode = "load";
+    slotsHeading.textContent = "Load";
+    returnTarget = from;
+    renderSlots();
+    showScreen(slotsScreen);
+  }
+
   function escapeHtml(str) {
     const div = document.createElement("div");
     div.textContent = str;
@@ -90,26 +98,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("menu-continue").addEventListener("click", () => {
-    const slots = Engine.listSlots();
-    let latestSlot = -1,
-      latestTime = -1;
-    slots.forEach((s, i) => {
-      if (s && s.savedAt > latestTime) {
-        latestTime = s.savedAt;
-        latestSlot = i + 1;
-      }
-    });
-    if (latestSlot === -1) return;
-    revealGame();
-    Engine.loadFromSlot(latestSlot);
+    openLoadScreen(menuScreen);
   });
 
   document.getElementById("menu-load").addEventListener("click", () => {
-    slotsMode = "load";
-    slotsHeading.textContent = "Load";
-    returnTarget = menuScreen;
-    renderSlots();
-    showScreen(slotsScreen);
+    openLoadScreen(menuScreen);
   });
 
   document.getElementById("menu-settings").addEventListener("click", () => {
@@ -127,11 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("load-btn").addEventListener("click", () => {
-    slotsMode = "load";
-    slotsHeading.textContent = "Load";
-    returnTarget = null;
-    renderSlots();
-    showScreen(slotsScreen);
+    openLoadScreen(null);
   });
 
   // ---------------- back buttons ----------------
