@@ -752,6 +752,9 @@ body {
   display: flex;
   gap: 10px;
 }
+#controls.hidden {
+  display: none;
+}
 #controls button {
   font-family: var(--mono);
   font-size: 10px;

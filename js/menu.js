@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const settingsScreen = document.getElementById("settings-screen");
   const slotsGrid = document.getElementById("slots-grid");
   const slotsHeading = document.getElementById("slots-heading");
+  const controls = document.getElementById("controls");
 
   const allScreens = [titleCard, menuScreen, slotsScreen, settingsScreen];
 
@@ -22,6 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function hideAllScreens() {
     allScreens.forEach((s) => s.classList.add("hidden"));
+  }
+
+  // Used specifically when gameplay is actually starting/resuming (new game,
+  // continue, or loading a slot) — this is the one moment the SAVE/LOAD/SKIP
+  // controls should appear, since before this there's no running scene yet.
+  function revealGame() {
+    hideAllScreens();
+    controls.classList.remove("hidden");
   }
 
   function goBack() {
@@ -57,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
       card.addEventListener("click", () => {
         if (slotsMode === "load") {
           if (!data) return;
-          hideAllScreens();
+          revealGame();
           Engine.loadFromSlot(n);
         } else {
           Engine.saveToSlot(n);
@@ -76,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ---------------- menu actions ----------------
   document.getElementById("menu-newgame").addEventListener("click", () => {
-    hideAllScreens();
+    revealGame();
     Engine.newGame();
   });
 
@@ -91,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
     if (latestSlot === -1) return;
-    hideAllScreens();
+    revealGame();
     Engine.loadFromSlot(latestSlot);
   });
 
@@ -129,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("slots-back").addEventListener("click", goBack);
   document.getElementById("settings-back").addEventListener("click", goBack);
 
-  // ---------------- settings (persisted, not yet wired to real audio) ----------------
+  // ---------------- settings ----------------
   const musicSlider = document.getElementById("music-volume");
   const sfxSlider = document.getElementById("sfx-volume");
   const savedSettings = JSON.parse(
