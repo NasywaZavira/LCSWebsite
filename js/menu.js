@@ -85,13 +85,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ---------------- title -> menu ----------------
+  // Title -> menu
   document.getElementById("start-btn").addEventListener("click", () => {
     refreshContinueButton();
     showScreen(menuScreen);
   });
 
-  // ---------------- menu actions ----------------
+  // Menu actions
   document.getElementById("menu-newgame").addEventListener("click", () => {
     revealGame();
     Engine.newGame();
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showScreen(settingsScreen);
   });
 
-  // ---------------- in-game controls (save/load mid-scene) ----------------
+  // In-game controls
   document.getElementById("save-btn").addEventListener("click", () => {
     slotsMode = "save";
     slotsHeading.textContent = "Save";
@@ -123,11 +123,11 @@ document.addEventListener("DOMContentLoaded", () => {
     openLoadScreen(null);
   });
 
-  // ---------------- back buttons ----------------
+  // Back buttons
   document.getElementById("slots-back").addEventListener("click", goBack);
   document.getElementById("settings-back").addEventListener("click", goBack);
 
-  // ---------------- settings ----------------
+  // Settings
   const musicSlider = document.getElementById("music-volume");
   const sfxSlider = document.getElementById("sfx-volume");
   const savedSettings = JSON.parse(

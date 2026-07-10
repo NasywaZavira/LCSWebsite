@@ -11,7 +11,7 @@
    is marked clearly below so it's obvious where to keep writing. */
 
 const PROLOGUE_SCRIPT = [
-  // ---------------- cold open ----------------
+  // Cold open
   { bg: "void" },
   { epigraph: "If you are lost, and the thought becomes the truth." },
   { epigraph: "About what kind of future will you create?" },
@@ -24,7 +24,7 @@ const PROLOGUE_SCRIPT = [
   { epigraph: "If anything... I  would like to see it myself." },
   { hide: "left" },
 
-  // ---------------- Marley enters the office (cinematic) ----------------
+  // Marley enters the office
   { bgm: "work ambience, keyboards clicking, humming buzz" },
   { bg: "office_evening" },
   {
@@ -40,7 +40,7 @@ const PROLOGUE_SCRIPT = [
       "Marley stopped in the middle of the room. They took a deep breath.",
   },
 
-  // ---------------- at the desk ----------------
+  // At the desk
   { bg: "office_desk" },
   { thought: "Okay. Made it.", speaker: "Marley", portrait: "smile" },
   { thought: "Barely.", speaker: "Marley", portrait: "wary" },
@@ -161,7 +161,7 @@ const PROLOGUE_SCRIPT = [
   { narration: "I rest my head against my hand." },
   { narration: "Just for a second." },
 
-  // ---------------- the wrongness ----------------
+  // The wrongness
   { bgm: "low hum of AC, then all BGM slowly fades out" },
   { bg: "office_empty" },
   { bgm: "low hum" },
@@ -201,7 +201,7 @@ const PROLOGUE_SCRIPT = [
 
   { setFilter: "red" },
 
-  // ---------------- exploration ----------------
+  // Exploration
   {
     explore: "Exploration Begins",
     hotspots: [
@@ -220,7 +220,7 @@ const PROLOGUE_SCRIPT = [
     continueGoto: "hallway_stub",
   },
 
-  // ---------------- draft ends here ----------------
+  // Draft ends here
   { label: "hallway_stub" },
   { narration: "(the draft ends here \u2014 to be continued: the Hallway)" },
   { end: true },
