@@ -51,6 +51,7 @@ const Engine = (() => {
   let epigraphFadeTimer = null;
   let lastLineText = ""; // most recent narration/thought/dialogue text, used as a save-slot preview
   let currentBgName = ""; // current background name, could be used for slot thumbnails later
+  let pendingAdvanceHandler = null;
 
   const els = {};
 
@@ -76,6 +77,12 @@ const Engine = (() => {
   function onAdvanceClick() {
     if (!waitingForAdvance) return;
     waitingForAdvance = false;
+    if (pendingAdvanceHandler) {
+      const handler = pendingAdvanceHandler;
+      pendingAdvanceHandler = null;
+      handler();
+      return;
+    }
     if (pendingExploreReturn) {
       const beat = pendingExploreReturn;
       pendingExploreReturn = null;
@@ -210,7 +217,7 @@ const Engine = (() => {
     }
   }
 
-  function showLine(beat) {
+  function showLine(beat, onAdvance) {
     hideEpigraph();
     const mode =
       beat._mode === "thought"
@@ -230,6 +237,7 @@ const Engine = (() => {
     els.dialogueText.classList.remove("narration", "thought");
     els.dialogueText.classList.add(mode === "dialogue" ? "narration" : mode); // dialogue reuses plain styling
     updatePortrait(beat, mode);
+    pendingAdvanceHandler = onAdvance || null;
     waitingForAdvance = true;
   }
 
@@ -309,6 +317,46 @@ const Engine = (() => {
     els.textboxWrap.classList.add("visible");
   }
 
+  function playHotspotSequence(hotspot, parentExploreBeat) {
+    const beats =
+      Array.isArray(hotspot.beats) && hotspot.beats.length
+        ? hotspot.beats
+        : [{ narration: hotspot.text || "" }];
+    let cursor = 0;
+
+    const playNext = () => {
+      if (cursor >= beats.length) {
+        pendingExploreReturn = parentExploreBeat;
+        showExplore(parentExploreBeat);
+        return;
+      }
+
+      const beat = beats[cursor++];
+      if (beat.sfx || beat.bgm) {
+        showCue(beat);
+        setTimeout(playNext, 2200);
+        return;
+      }
+
+      const normalizedBeat = {
+        ...beat,
+        portrait: beat.portrait || hotspot.portrait || "neutral",
+        _forcePortrait: true,
+        speaker: beat.speaker || (beat.thought ? "Marley" : undefined),
+      };
+
+      if (beat.thought) {
+        showLine({ ...normalizedBeat, _mode: "thought" }, playNext);
+      } else if (beat.speaker || beat.narration || beat.text) {
+        showLine(normalizedBeat, playNext);
+      } else {
+        playNext();
+      }
+    };
+
+    playNext();
+  }
+
   function showExplore(beat) {
     if (!beat._checked) beat._checked = new Set();
 
@@ -330,13 +378,7 @@ const Engine = (() => {
       btn.addEventListener("click", () => {
         beat._checked.add(h.label);
         els.choiceLayer.classList.remove("visible");
-        pendingExploreReturn = beat;
-        showLine({
-          narration: h.text,
-          speaker: "Marley",
-          portrait: h.portrait || "neutral",
-          _forcePortrait: true,
-        });
+        playHotspotSequence(h, beat);
       });
       hotspotWrap.appendChild(btn);
     });
