@@ -217,12 +217,398 @@ const PROLOGUE_SCRIPT = [
       },
     ],
     continueText: "Go to the Hallway \u2192",
-    continueGoto: "hallway_stub",
+    continueGoto: "hallway",
   },
 
+  // ==================== the hallway ====================
+  { label: "hallway" },
+  { bg: "hallway", bgFade: 1800 },
+
+  { speaker: "Marley", text: ". . .", portrait: "wary" },
+  {
+    thought: "Where's everybody else....?",
+    speaker: "Marley",
+    portrait: "confused",
+  },
+  { speaker: "Marley", text: "Hello...?", portrait: "wary" },
+
+  { sfx: "thud" },
+  {
+    narration:
+      "My whole body locks up. That sounded so loud in this moment where everything is silent.",
+  },
+  { thought: "...that wasn't me.", speaker: "Marley", portrait: "wary" },
+  {
+    narration:
+      "I turn toward the sound, slow, like turning any faster might make it real. The hallway stretches out ahead of me, longer than I remember it being. Longer than it should be.",
+  },
+  { speaker: "Marley", text: "H-hello? Is someone there?", portrait: "wary" },
+  {
+    narration:
+      "Nothing answers. Just the hum. The same low hum that's been following me since I opened my eyes.",
+  },
+  { narration: "I take a step. Then another." },
+  {
+    narration:
+      "The handicam is still in my hand. I don't remember picking it back up.",
+  },
+  {
+    thought: "Right... Evidence, just in case something happened.",
+    speaker: "Marley",
+    portrait: "confused",
+  },
+  {
+    narration:
+      "I lift it, framing the hallway through the little flip-out screen instead of my own eyes. It feels safer that way, somehow. Like I'm watching a video of this happening to someone else, instead of living it.",
+  },
+  { narration: "The image flickers. Static, then clear again." },
+  { sfx: "static crackle" },
+  {
+    speaker: "Marley",
+    text: "...Okay. Okay, that's normal. Old equipment. That's all.",
+    portrait: "neutral",
+  },
+  {
+    speaker: "Marley",
+    text: "Note to myself, I should probably buy a new handicam after earning my salary this month...",
+    portrait: "smile",
+  },
+  { narration: "I don't believe myself but I keep walking anyway." },
+
+  // ---------------- second exploration phase ----------------
+  {
+    explore: "Continue Exploration",
+    hotspots: [
+      {
+        label: "Check: Break Room",
+        portrait: "wary",
+        beats: [
+          {
+            narration:
+              "The break room door is open. The vending machine inside is still running, its light humming that same sickly fluorescent white, snacks lined up neat behind the glass like nothing's wrong at all.",
+          },
+          {
+            thought: "Right, the vending machine still works. How convenient",
+            portrait: "wary",
+          },
+          {
+            narration:
+              "There's a whiteboard on the wall by the sink, the one people scribble reminders on. Meeting at 3. Don't forget to restock coffee. Someone drew a badly-proportioned cat next to a name I can't read.",
+          },
+          { narration: "I take a step closer." },
+          {
+            narration:
+              "The same three lines are written over and over, stacked on top of each other in different handwriting, like six different people wrote the exact same thing without erasing what came before.",
+          },
+          {
+            speaker: "Marley",
+            text: "...'don't forget.' Don't forget what?",
+            portrait: "confused",
+          },
+          {
+            narration:
+              "I reach out. My fingertip touches the board. The marker ink smears under my touch, wet, even though it should've dried hours ago.",
+          },
+          { narration: "I pull my hand back fast." },
+          {
+            thought: "That's not right. That's not right, that's not\u2014",
+            portrait: "wary",
+          },
+          { sfx: "static crackle" },
+        ],
+      },
+      {
+        label: "Check: Desks with Photos",
+        portrait: "confused",
+        beats: [
+          {
+            narration:
+              "There's a row of desks near the window I didn't check before. Family photos, usually. A coworker's kid's drawing taped to a monitor. Little things people bring in to make a desk feel like theirs.",
+          },
+          {
+            narration:
+              "The frames are still there but the photos inside them aren't. Every single one is blank.",
+          },
+          { speaker: "Marley", text: "...Weird.", portrait: "confused" },
+          {
+            thought: "Wait. Whose desk is this supposed to be?",
+            portrait: "confused",
+          },
+          {
+            narration:
+              "I stare at the nameplate. It's blank too. I know I've walked past this desk every day for months. I know there's supposed to be a name here.",
+          },
+          { narration: "I can't remember it." },
+          { narration: "I can't remember it." },
+          {
+            narration:
+              "My chest tightens. I press a hand to my notebook pocket out of habit\u2014the little one I always carry, the one I write everything down in so I don't lose it later. I pull it out and flip it open with shaking fingers.",
+          },
+          { narration: "Pages and pages of my own handwriting. Except..." },
+          {
+            narration:
+              "Except some of it isn't. A few entries near the back are written smaller, tighter, slanted the wrong way. Notes I don't remember taking. A sentence circled twice: \u201cask B about that person.\u201d I don't know a B. I don't know who is the person mentioned.",
+          },
+          { speaker: "Marley", text: "I didn't write this.", portrait: "wary" },
+          { speaker: "Marley", text: "Right...?", portrait: "confused" },
+          { sfx: "faint, distant laughter" },
+          { narration: "My head snaps up." },
+          { speaker: "Marley", text: "...Hello?", portrait: "wary" },
+          { narration: "Silence answers me." },
+          {
+            narration:
+              "I shove the notebook into my pocket and keep moving, faster now, camera still raised like it's a shield instead of a recording device.",
+          },
+        ],
+      },
+      {
+        label: "Check: Stairwell Door",
+        portrait: "wary",
+        beats: [
+          {
+            narration:
+              "At the end of the hall there's a door I know leads to the stairwell. It's propped open a few inches, just enough for cold air to bleed through the gap. Actual cold, the kind that raises the hair on my arms, its giving me the creeps.",
+          },
+          {
+            thought:
+              "That door's never open. Facilities keeps it locked for fire code or something.",
+            portrait: "wary",
+          },
+          { narration: "I push it open the rest of the way." },
+          { sfx: "door hinge groan" },
+          {
+            narration:
+              "The stairwell goes down further than it should. I can see maybe three flights before the light gives out completely, swallowed by a dark that doesn't look like ordinary dark. It looks thicker. Like it's got weight to it.",
+          },
+          {
+            narration:
+              "Something echoes up from below. Not footsteps exactly. More like\u2014dragging. Slow, deliberate, uneven, like something with too many limbs figuring out how to use the ones it has.",
+          },
+          { speaker: "Marley", text: "...Nope.", portrait: "wary" },
+          {
+            narration:
+              "I let the door swing shut, hands trembling around the handicam.",
+          },
+          { sfx: "door slam" },
+          {
+            narration:
+              "The bang of it echoes down the empty hallway, way too loud, way too long. It shouldn't still be echoing. It's been at least five seconds.",
+          },
+          { narration: "It's still echoing." },
+          {
+            speaker: "Marley",
+            text: "Okay. Okay, think. Think, think\u2014",
+            portrait: "wary",
+          },
+          {
+            thought:
+              "Fire exit's on the other end of the floor. Past the elevators. I can make it there without going near that door again.",
+            portrait: "confused",
+          },
+        ],
+      },
+    ],
+    continueText: "Turn to Go \u2192",
+    continueGoto: "chase_start",
+  },
+
+  // ==================== the chase ====================
+  { label: "chase_start" },
+  { narration: "I turn to go." },
+  // NOTE (author's TBA): exact sound for "something moves at the edge of the frame" not decided yet
+  { sfx: "something moves at the edge of the frame" },
+  { narration: "The handicam screen catches it before I do, I thought so." },
+  {
+    narration:
+      "A shape at the far end of the hall, just past the edge of the light. Tall. Too still to be a person standing there, too shaped to be a coat rack or a shadow.",
+  },
+  { narration: "I lower the camera and look with my own eyes." },
+  { narration: "There's nothing there." },
+  { narration: "I raise the camera again." },
+  { effect: "realboot" },
+  { narration: "It's still there. On the screen. Only on the screen." },
+  {
+    speaker: "Marley",
+    text: "...No. No, no, that's not\u2014",
+    portrait: "wary",
+  },
+  {
+    narration:
+      "The shape tilts. Like it's looking at the lens. Like it knows exactly what's holding it.",
+  },
+  // NOTE (author): "distortion swell" BGM, tension similar to Re:Zero's horror beats
+  { bgm: "distortion swell" },
+  { effect: "shake" },
+  {
+    narration:
+      "Every light in the hallway flickers at once, and for half a second the whole office looks wrong, walls bent slightly inward, ceiling too low, floor too long, like the building took a breath and forgot how to hold its shape.",
+  },
+  {
+    speaker: "Marley",
+    text: "...okay, running now, running is good, running is the plan\u2014",
+    portrait: "wary",
+  },
+  {
+    narration:
+      "I don't remember deciding to move. My legs are just moving, camera still clutched in one hand, my bag strap slipping off my shoulder and dragging behind me. Every door I pass rattles like something's testing the handle from the inside. The hum isn't a hum anymore, it's closer to breathing, uneven, wet, keeping pace with my footsteps like it's learning my rhythm.",
+  },
+  { sfx: "rapid footsteps, breathing" },
+  {
+    speaker: "Marley",
+    text: "This isn't\u2014this isn't my office, this isn't my office, this isn't\u2014",
+    portrait: "wary",
+  },
+  {
+    thought: "Elevators. Elevators, elevators, where are the\u2014",
+    speaker: "Marley",
+    portrait: "wary",
+  },
+  {
+    narration:
+      "The hallway forks. I don't remember it forking. I take the left without thinking, and the left keeps going, and going, doors sliding past too fast to count, and somewhere behind me something that sounds almost like my name gets called in a voice that almost sounds like mine.",
+  },
+  { speaker: "Marley", text: "\u2014!!!", portrait: "wary" },
+  { sfx: "impact, camera drops" },
+  {
+    narration:
+      "My foot catches on something\u2014a cable, a chair leg, the edge of the world itself for all I know\u2014and the handicam flies from my hand. I hit the floor hard, palms first, the sting of it barely registering over the sound of my own heartbeat slamming in my ears.",
+  },
+  { narration: "I look up." },
+  {
+    narration:
+      "The hallway lights go out, one by one, in a line, moving toward me like something is walking down the row and switching them off with its hand.",
+  },
+  { speaker: "Marley", text: "No\u2014no, no, please\u2014", portrait: "wary" },
+  {
+    thought: "Get up. Get up, get up, get\u2014",
+    speaker: "Marley",
+    portrait: "wary",
+  },
+  { sfx: "sharp ringing, then silence" },
+  { effect: "shake" },
+  { bg: "void", bgFade: 900 },
+
+  // ==================== POV cutaway (not yet written) ====================
+  { label: "blanc_pov_stub" },
+  { bg: "street_night", bgFade: 1500 },
+  {
+    narration:
+      "(Blanc's POV \u2014 not written yet in the draft. Placeholder: Street Corner, Night, elsewhere in the city.)",
+  },
+
+  // ==================== back to Marley ====================
+  { bg: "void", bgFade: 600 },
+  { sfx: "sirens, distant, growing closer" },
+  {
+    narration:
+      "The world comes back in pieces. Red and blue light strobing somewhere above me. The wet, cold press of asphalt under my palms. A ringing in my ears that won't quit.",
+  },
+  { speaker: "Marley", text: "...ngh.", portrait: "wary" },
+  {
+    thought: "My head. My head, hurts...",
+    speaker: "Marley",
+    portrait: "wary",
+  },
+  {
+    narration:
+      "I push myself up, and my hands slip against something warm. Something that shouldn't be warm out here, in the cold, this late.",
+  },
+  { narration: "I look down." },
+  { bg: "crime_scene", bgFade: 1200 },
+  {
+    narration:
+      "Red. Dark and thick, smeared across both palms, dripping in thin lines down my wrists.",
+  },
+  { speaker: "Marley", text: "N-no. No, no, no\u2014", portrait: "wary" },
+  {
+    narration:
+      "My breath won't come right. Around me, shapes resolve out of the strobing light, officers, tape, and a crowd held back at a distance, all of them staring at me like I'm the only thing in the world worth looking at.",
+  },
+  { thought: "Stop staring at me\u2014", speaker: "Marley", portrait: "wary" },
+  {
+    thought: "They think I did this. They think\u2014",
+    speaker: "Marley",
+    portrait: "wary",
+  },
+  {
+    narration:
+      "I don't let myself finish that thought. My legs move before my brain catches up, some instinct screaming louder than the panic.",
+  },
+  { sfx: "scramble" },
+  {
+    narration:
+      "I shove myself backward, away from the\u2014from it, from the shape on the ground I can't make myself look at directly. My palm slips in more red. I don't stop to wipe it off.",
+  },
+  { speaker: "Voice", text: "Hey\u2014hey, wait, don't move\u2014" },
+  {
+    narration:
+      "A hand reaches for my arm. I flinch out of range before it lands, stumbling upright on legs that don't feel like mine.",
+  },
+  {
+    speaker: "Marley",
+    text: "I didn't\u2014I didn't do this, I didn't\u2014",
+    portrait: "wary",
+  },
+  { speaker: "Voice", text: "Stop! Stay where you are!" },
+  {
+    narration:
+      "Nobody's listening. Not to reason, not to me. And maybe they're right not to\u2014maybe there's nothing left in me worth listening to.",
+  },
+  { narration: "I run." },
+  { sfx: "footsteps, sirens rising behind" },
+  {
+    narration:
+      "The tape snaps against my shoulder as I duck under it. Somewhere behind me, more shouting, radios crackling, the scrape of boots against asphalt. I don't look back. Looking back means seeing it again\u2014the shape on the ground, the color on my hands, the version of tonight I can't undo by running from it.",
+  },
+  {
+    thought: "Just move. Just move, just move, just\u2014",
+    speaker: "Marley",
+    portrait: "wary",
+  },
+  {
+    narration:
+      "The crowd parts around me, phones raised, voices rising into a blur of noise I can't separate into words. Someone grabs at my sleeve and I twist free without thinking, without apologizing, without anything but the single animal need to be anywhere but there.",
+  },
+  { speaker: "Voice", text: "He's running! Get him\u2014!" },
+  {
+    thought: "He's wrong. I'm not\u2014I don't even know what I\u2014",
+    speaker: "Marley",
+    portrait: "wary",
+  },
+  {
+    narration:
+      "The street blurs. Streetlights smear into long red-gold streaks at the edge of my vision. My lungs burn. My hands are still wet. I don't stop to check with what.",
+  },
+  {
+    narration:
+      "I don't know how long I run. I don't know where I'm running to. I just know that stopping means turning around, and turning around means finding out for certain what I already know.",
+  },
+  { sfx: "sirens fading into distance" },
+  {
+    narration:
+      "Eventually my legs give out before my fear does. I collapse into the mouth of an alley, back hitting brick, chest heaving, hands pressed flat against the cold ground like I could push the last few minutes back into the earth.",
+  },
+  { bg: "alley", bgFade: 1500 },
+  {
+    speaker: "Marley",
+    text: "...I didn't. I didn't, I didn't, I didn't\u2014",
+    portrait: "wary",
+  },
+  {
+    thought:
+      "Say it enough times and it'll be true. Say it enough times and it'll be true. Say it\u2014",
+    speaker: "Marley",
+    portrait: "wary",
+  },
+  {
+    narration:
+      "Above me, distorted through the gap between buildings, a light sweeps once across the alley mouth and moves on.",
+  },
+  { narration: "I stay very still until it's gone." },
+  { bg: "void", bgFade: 2000 },
+
   // Draft ends here
-  { label: "hallway_stub" },
-  { narration: "(the draft ends here \u2014 to be continued: the Hallway)" },
+  { narration: "(the draft ends here \u2014 to be continued)" },
   { end: true },
 ];
 
