@@ -225,12 +225,9 @@ const Engine = (() => {
         : beat.narration
           ? "narration"
           : "dialogue";
+    const shouldShowName = mode === "dialogue" || mode === "thought";
     els.namebox.textContent =
-      mode === "dialogue"
-        ? beat.speaker || ""
-        : beat.speaker && mode === "thought"
-          ? beat.speaker
-          : "";
+      shouldShowName && beat.speaker ? beat.speaker : "";
     els.namebox.classList.toggle("dim", mode === "thought");
     els.dialogueText.textContent = beat.narration || beat.thought || beat.text;
     lastLineText = beat.narration || beat.thought || beat.text || lastLineText;
@@ -242,8 +239,11 @@ const Engine = (() => {
   }
 
   function updatePortrait(beat, mode) {
-    const force = !!beat._forcePortrait;
-    if (!force && (mode === "narration" || !beat.speaker)) {
+    const shouldShowPortrait =
+      (mode === "dialogue" || mode === "thought") &&
+      (!!beat.speaker || !!beat._forcePortrait);
+
+    if (!shouldShowPortrait) {
       els.portraitBox.classList.add("hidden");
       els.textboxDivider.classList.add("hidden");
       return;
