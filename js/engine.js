@@ -50,7 +50,6 @@ const Engine = (() => {
   let index = 0;
   let waitingForAdvance = false;
   let flags = {};
-  let pendingExploreReturn = null; // set while showing a hotspot's text; resumes the explore menu on advance
   let epigraphFadeTimer = null;
   let lastLineText = ""; // most recent narration/thought/dialogue text, used as a save-slot preview
   let currentBgName = ""; // current background name, could be used for slot thumbnails later
@@ -85,11 +84,6 @@ const Engine = (() => {
       pendingAdvanceHandler = null;
       handler();
       return;
-    }
-    if (pendingExploreReturn) {
-      const beat = pendingExploreReturn;
-      pendingExploreReturn = null;
-      return showExplore(beat);
     }
     step();
   }
@@ -335,7 +329,6 @@ const Engine = (() => {
 
     const playNext = () => {
       if (cursor >= beats.length) {
-        pendingExploreReturn = parentExploreBeat;
         showExplore(parentExploreBeat);
         return;
       }
