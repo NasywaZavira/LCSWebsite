@@ -12,10 +12,13 @@
    { narration:'...' }                          plain narration/prose, no name shown
    { thought:'...', speaker:'Marley' }          italic inner monologue (speaker optional)
    { speaker:'Marley', text:'...', portrait:'neutral' }
-                                                 dialogue/thought beats can add `portrait:
-                                                 'neutral'|'confused'|'smile'|'wary'` to show/update
-                                                 that character's expression box. Portrait box hides
-                                                 automatically when the beat has no portrait set.
+                                                 dialogue/thought beats can add `portrait:` to show/update
+                                                 that character's expression box — but ONLY for icon-set
+                                                 POV characters (currently Marley: neutral/confused/smile/
+                                                 wary, and Blanc: neutral/confused/estatic/flat). Everyone
+                                                 else (Mary, Noir, ...) just shows name + text, since they're
+                                                 represented by their standing sprite instead — see
+                                                 ICON_POV_CHARACTERS below if you add a 3rd icon-set character.
    { sfx:'thud, shuffle' } / { bgm:'work ambience' }
                                                  ambient audio cue caption (placeholder until
                                                  real audio exists — non-blocking, auto-continues)
@@ -238,10 +241,16 @@ const Engine = (() => {
     waitingForAdvance = true;
   }
 
+  // Characters with a 4-expression icon set (textbox portrait). Everyone else
+  // (Mary, Noir, ...) is represented by their standing sprite instead, so
+  // dialogue/thought from them shows name + text only, no icon box.
+  const ICON_POV_CHARACTERS = ["marley", "blanc"];
+
   function updatePortrait(beat, mode) {
+    const speakerKey = (beat.speaker || "").toLowerCase();
     const shouldShowPortrait =
       (mode === "dialogue" || mode === "thought") &&
-      (!!beat.speaker || !!beat._forcePortrait);
+      (beat._forcePortrait || ICON_POV_CHARACTERS.includes(speakerKey));
 
     if (!shouldShowPortrait) {
       els.portraitBox.classList.add("hidden");

@@ -488,13 +488,135 @@ const PROLOGUE_SCRIPT = [
   { effect: "shake" },
   { bg: "void", bgFade: 900 },
 
-  // ==================== POV cutaway (not yet written) ====================
+  // ==================== Blanc's POV: street corner ====================
   { label: "blanc_pov_stub" },
   { bg: "street_night", bgFade: 1500 },
+  { bgm: "low city ambience, distant traffic" },
+  { sprite: "right", name: "Mary", art: "mary_default.webp" },
+
   {
     narration:
-      "(Blanc's POV \u2014 not written yet in the draft. Placeholder: Street Corner, Night, elsewhere in the city.)",
+      "Blanc leans against the hood of Mary's car, arms crossed, looking entirely too pleased with himself for someone who wasn't invited.",
   },
+  { narration: "She said not to follow her this time." },
+  { narration: "I followed her anyway." },
+  {
+    speaker: "Blanc",
+    text: "So this is where you disappear to at 11 PM. Very mysterious. Very 'lone wolf detective.' I'm almost jealous.",
+    portrait: "estatic",
+  },
+  { speaker: "Mary", text: "I said don't follow me, Blanc." },
+  {
+    speaker: "Blanc",
+    text: "And yet, here I am. Character growth, you see.",
+    portrait: "estatic",
+  },
+
+  { sfx: "folder slapping against car hood" },
+  {
+    narration:
+      "Mary drops a case folder onto the hood between them. Hard enough that it's less \u2018here you go\u2019 and more \u2018don't make me regret this.\u2019",
+  },
+
+  { speaker: "Mary", text: "You're a civilian." },
+  { speaker: "Blanc", text: "I'm a civilian.", portrait: "flat" },
+  { speaker: "Mary", text: "You're not on this case." },
+  { speaker: "Blanc", text: "I'm not on this case.", portrait: "flat" },
+  { speaker: "Mary", text: "You're not touching this folder." },
+  { narration: "I'm already touching the folder." },
+  { speaker: "Blanc", text: "Wouldn't dream of it.", portrait: "estatic" },
+
+  {
+    narration:
+      "Noir, silent until now, is already standing close enough to read over Blanc's shoulder. He doesn't ask permission either.",
+  },
+  { sprite: "left", name: "Noir", art: "noir_default.webp" },
+
+  {
+    thought:
+      "[Victim Name]. Twenty-something. Not that different from me, on paper.",
+    speaker: "Blanc",
+    portrait: "confused",
+  },
+  { speaker: "Blanc", text: "Huh. Ruled as suicide?", portrait: "confused" },
+  {
+    speaker: "Mary",
+    text: "Officially, yes. Unofficially, I don't buy it, and neither does half the department. But 'officially' is what goes in my report.",
+  },
+  {
+    speaker: "Blanc",
+    text: "So what's the unofficial version?",
+    portrait: "neutral",
+  },
+  {
+    speaker: "Mary",
+    text: "The unofficial version is four cases with the same 'suicide' write-up in six months, and every single one of them staged just clean enough that it'd only bother someone paid to be suspicious.",
+  },
+  { speaker: "Noir", text: "Four?" },
+  { speaker: "Mary", text: "Four that I know of." },
+  {
+    speaker: "Noir",
+    text: "That's a lot for the department to call 'nothing.'",
+  },
+  {
+    speaker: "Mary",
+    text: "Tell me about it. I've been saying that for weeks.",
+  },
+  {
+    speaker: "Blanc",
+    text: "So why haven't you got backup on this?",
+    portrait: "neutral",
+  },
+  {
+    speaker: "Mary",
+    text: "Because 'a pattern' isn't evidence, and I'm not exactly senior enough to make people listen yet.",
+  },
+
+  { narration: "Blanc leans closer to the photo, tilting his head." },
+  // author's placeholder note in the draft: "SAMTING SAMTING DISINI" (something goes here, not yet decided)
+  {
+    narration:
+      "(unwritten beat \u2014 placeholder from the draft, not yet decided)",
+  },
+
+  {
+    speaker: "Blanc",
+    text: "I'm just saying, someone should ask\u2014",
+    portrait: "confused",
+  },
+  { speaker: "Mary", text: "Blanc." },
+  { speaker: "Noir", text: "He's not wrong to ask." },
+  {
+    speaker: "Mary",
+    text: "I didn't say he was wrong. I said it's not his case.",
+  },
+  { speaker: "Noir", text: "Still not wrong." },
+  { speaker: "Blanc", text: "...Thank you, Noir.", portrait: "flat" },
+  { narration: "Mary sighs." },
+  { speaker: "Mary", text: "You two are impossible." },
+
+  { sfx: "radio static, garbled voice" },
+  {
+    narration:
+      "A radio crackles from inside Mary's car\u2014dispatch, half-swallowed by static, something about a location and a unit being requested.",
+  },
+  { speaker: "Mary", text: "...That's mine." },
+  {
+    narration:
+      "She's already moving, folder snatched back off the hood before Blanc can even protest.",
+  },
+  {
+    speaker: "Blanc",
+    text: "Wait, that's not fair, I didn't even get to\u2014",
+    portrait: "confused",
+  },
+  { speaker: "Mary", text: "Go home, Blanc." },
+  { speaker: "Noir", text: "We're not going home." },
+  { speaker: "Mary", text: "...I didn't think so." },
+
+  { hide: "left" },
+  { hide: "right" },
+  { bg: "void", bgFade: 900 },
 
   // ==================== back to Marley ====================
   { bg: "void", bgFade: 600 },
