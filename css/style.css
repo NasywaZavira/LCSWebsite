@@ -226,7 +226,7 @@ body {
 .sprite {
   position: absolute;
   top: 2%;
-  height: 90%;
+  height: 80%;
   width: 34%;
   max-width: 320px;
   background-size: contain;
