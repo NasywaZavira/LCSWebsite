@@ -225,13 +225,13 @@ body {
 }
 .sprite {
   position: absolute;
-  bottom: 14%;
+  top: 2%;
+  height: 90%;
   width: 34%;
-  max-width: 280px;
-  aspect-ratio: 1/2.1;
+  max-width: 320px;
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-position: top center;
   opacity: 0;
   transform: translateY(12px);
   transition:
@@ -247,10 +247,10 @@ body {
   filter: brightness(0.55) saturate(0.6);
 }
 #sprite-left {
-  left: 6%;
+  left: 3%;
 }
 #sprite-right {
-  right: 6%;
+  right: 3%;
 }
 
 /* placeholder mark until real sprites are dropped in */
